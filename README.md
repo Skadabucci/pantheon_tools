@@ -19,10 +19,10 @@ Pantheon Tools is a set of python scripts that help automate some of the tedious
 ### MacroMaker 
 Macro is a Python script that allows you to create and manage spellbooks for different classes and generate macros based on the spells in the spellbook.
 
-To run the script, navigate to the directory containing `MacroMaker.py` and execute the following command:
+To run the script, navigate to the git directory and execute the following command:
 
 ```sh
-python MacroMaker.py
+python -m pantheon_tools.MacroMaker
 ```
 
 ### Options
