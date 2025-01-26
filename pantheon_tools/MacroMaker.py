@@ -139,6 +139,7 @@ def create_macro(spellbook: Spellbook):
     ranked_spells = spellbook.rank_spells()
     desired_spell_count = int(input("\nEnter the number of spells to include in the macro: "))
     number_of_spells = 0
+    verbose_mode = input("Would you like each spell listed in the console as it is cast? (y/n): ").lower() == 'y'
     warning_printed = False
     
     while number_of_spells < desired_spell_count:
@@ -146,6 +147,8 @@ def create_macro(spellbook: Spellbook):
         for spell in ranked_spells:
             if spell.last_cast is None or spell.last_cast >= spell.cooldown:
                 max_delay = max(GLOBAL_COOLDOWN, spell.cast_time)
+                if verbose_mode:
+                    macro_lines.append(f"# Casting: {spell.name}")
                 macro_lines.append(f"/{spell.type} {spell.location}")
                 macro_lines.append(f"/wait {max_delay:.1f}")
                 for other_spell in ranked_spells:
