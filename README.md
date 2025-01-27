@@ -100,6 +100,7 @@ Here is an example of how to use the script:
 This project is licensed under the MIT License.
 
 ## Backlog / Wishlist
+* Tests
 * MacroMaker
   * Turn the create_macro function into a Class for better handling of the object (ie: keeping wait times in float form and writing the file at the end of creation).
   * Have one spellbook and associate chapters of a spellbook with classes.
