@@ -1,7 +1,8 @@
-from typing import Optional, List, Union
-from datetime import datetime
 import json
+import sys
+
 from enum import Enum
+from typing import Optional, List
 
 GLOBAL_COOLDOWN = 1.1
 
@@ -79,12 +80,16 @@ class Spellbook:
     def add_spells_interactively(self) -> None:
         while True:
             print("\nOptions:")
-            print("  (q) Quit")
+            print("  (S) Save and continue to Macro Creation")
             print("  (L) List existing spells")
+            print("  (Q) Save and Quit")
             print("  Create a new spell")
             option = input("Choose (q or L) or type name of spell: ")
 
             if option.lower() == 'q' or option.lower() == 'quit':
+                self.save_to_file()
+                sys.exit(0)
+            elif option.lower() == 's' or option.lower() == 'save':
                 break
             elif option.lower() == 'l' or option.lower() == 'list':
                 self.list_spells()
