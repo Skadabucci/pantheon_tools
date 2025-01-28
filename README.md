@@ -12,9 +12,34 @@ Pantheon Tools is a set of python scripts that help automate some of the tedious
     ```sh
     git clone <url>
     cd pantheon_tools
+    py.exe -m venv venv
+    .\\venv\\Scripts\\activate
+    py.exe -m pip install -r requirements.txt
     ```
 
 ## Usage
+
+### ExperiencePrediction
+This tool runs continuously and makes predictions on how much XP you gain per kill. It does some simple screen-scraping to find the XP bar and then calcualte changes.
+
+```sh
+py.exe -m pantheon_tools.ExperiencePrediction
+```
+
+#### Assumptions
+Note there are a assumptions when using this tool. Your XP bar MUST be 100% opacity for this script to work. Otherwise it will vary too much in color. I don't use any techniques like grayscale, median filters, binarization, or tesseract post processing. Also It will typically work better if it is at the bottom of the monitor.
+
+#### Configuration Parameters
+
+The following configuration parameters are used in the ExperiencePrediction tool:
+
+- `EXPERIENCE_COLOR`: A tuple representing the RGB color values of the experience bar. Default is `(42, 99, 216)`.
+- `EXPERIENCE_DIVIDER_COLOR`: A tuple representing the RGB color values of the experience divider. Default is `(155, 176, 237)`.
+- `DARK_BLUE_COLOR`: A tuple representing the RGB color values of the dark blue color used in the UI. Default is `(0, 34, 64)`.
+- `LIGHT_BLUE_COLOR`: A tuple representing the RGB color values of the light blue color used in the UI. Default is `(153, 166, 192)`.
+
+- `DEAD_PLAYER_THRESHOLD`: A float value representing the threshold to determine if a player is dead and lost a level. Default is `70.0`.
+- `SLEEP_TIME`: An integer representing the sleep time in seconds between each screen-scraping iteration. Default is `1`.
 
 ### MacroMaker 
 Macro is a Python script that allows you to create and manage spellbooks for different classes and generate macros based on the spells in the spellbook.
@@ -22,7 +47,7 @@ Macro is a Python script that allows you to create and manage spellbooks for dif
 To run the script, navigate to the git directory and execute the following command:
 
 ```sh
-python -m pantheon_tools.MacroMaker
+py.exe -m pantheon_tools.MacroMaker
 ```
 
 ### Options
