@@ -84,7 +84,7 @@ class Spellbook:
             print("  (L) List existing spells")
             print("  (Q) Save and Quit")
             print("  Create a new spell")
-            option = input("Choose (q or L) or type name of spell: ")
+            option = input("Choose [Q, L, or S] or type name of spell: ")
 
             if option.lower() == 'q' or option.lower() == 'quit':
                 self.save_to_file()
@@ -112,6 +112,7 @@ class Spellbook:
     def rank_spells(self) -> List[Spell]:
         ranked_spells: List[Spell] = []
         self.list_spells()
+        spell_count: int = len(self.spells)
         print(
             "\nRank the spells in order of importance by entering their IDs "
             "separated by spaces. You may exclude spells by leaving them out of this list."
@@ -123,11 +124,17 @@ class Spellbook:
                 spell_rank: int = int(spell_rank_string.strip())
                 if spell_rank in spell_rank_list:
                     print(f"Warning: Duplicate Spell Rank found {spell_rank} and ignored.")
+                elif spell_rank >= spell_count or spell_rank < 0:
+                    print(f"Warning: Invalid Spell Rank found {spell_rank} and ignored.")
                 else:
                     spell_rank_list.append(spell_rank)
 
         for spell_rank in spell_rank_list:
             ranked_spells.append(self.spells[spell_rank])
+
+        if len(ranked_spells) == 0:
+            print("Warning: No valid spells were ranked. Cancelling macro creation.")
+            sys.exit(1)
 
         return ranked_spells
 
