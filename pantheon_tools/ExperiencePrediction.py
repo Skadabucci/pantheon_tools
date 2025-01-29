@@ -11,7 +11,9 @@ DARK_BLUE_COLOR: T.Tuple[int, int, int] = (0, 34, 64)
 LIGHT_BLUE_COLOR: T.Tuple[int, int, int] = (153, 166, 192)
 
 DEAD_PLAYER_THRESHOLD = 70.0
-SLEEP_TIME = 1
+STARTUP_DELAY = 3
+XP_BAR_BLOCKED_TOLERANCE = 0.99
+XP_CHECK_SLEEP_TIME = 1
 
 class XPBar:
     def __init__(self, left: int, top: int, right: int, bottom: int) -> None:
@@ -19,15 +21,31 @@ class XPBar:
         self.get_xp_bar()
         self.get_left_padding()
     
-    def calculate_exp(self) -> int:
+    def calculate_exp(self) -> float:
+        send_xp_bar_lost_warning: bool = True
         self.max_experience_length: int = self.width - (self.left_padding * 2)
-        self.actual_experience_length: int = 0
-        for x in range(self.left_padding, self.width - self.left_padding):
-            pixel: T.Tuple[int, int, int] = self.pixels[x, self.height // 2]
-            if pixel == EXPERIENCE_COLOR or pixel == EXPERIENCE_DIVIDER_COLOR:
-                self.actual_experience_length += 1
-
-        return self.actual_experience_length / self.max_experience_length
+        while True:
+            # Number of pixels found that are part of the xp bar.
+            # This is useful for detecting alt tab or a window obstructing it.
+            xp_bar_pixels_found: int = 0
+            self.actual_experience_length: int = 0
+            for x in range(self.left_padding, self.width - self.left_padding):
+                pixel: T.Tuple[int, int, int] = self.pixels[x, self.height // 2]
+                if pixel == EXPERIENCE_COLOR or pixel == EXPERIENCE_DIVIDER_COLOR:
+                    self.actual_experience_length += 1
+                    xp_bar_pixels_found += 1
+                elif pixel == DARK_BLUE_COLOR or pixel == LIGHT_BLUE_COLOR:
+                    xp_bar_pixels_found += 1
+            if xp_bar_pixels_found < (self.xp_bar_location[2] - self.xp_bar_location[0]) * XP_BAR_BLOCKED_TOLERANCE:
+                if send_xp_bar_lost_warning:
+                    print(f"Warning: {(1 - XP_BAR_BLOCKED_TOLERANCE) * 100:.2f}% or more of the xp bar is blocked")
+                    send_xp_bar_lost_warning = False
+                self.get_xp_bar()
+                sleep(XP_CHECK_SLEEP_TIME)
+            else:
+                if not send_xp_bar_lost_warning:
+                    print("XP bar found. Continuing.")
+                return float(self.actual_experience_length / self.max_experience_length)
         
     def get_xp_bar(self) -> None:
         self.width: int
@@ -147,10 +165,11 @@ def main() -> int:
                 print(f"You Died. Lost Experience: {xp_lost * 100:.2f}%")
                 initial_xp = current_xp
                 
-            sleep(SLEEP_TIME)
+            sleep(XP_CHECK_SLEEP_TIME)
     except KeyboardInterrupt:
         print("Exiting...")
         return 0
 
 if __name__ == "__main__":
+    sleep(STARTUP_DELAY) # Add a startup delay so users can switch to the game in time.
     main()
