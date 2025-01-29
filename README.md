@@ -27,7 +27,21 @@ py.exe -m pantheon_tools.ExperiencePrediction
 ```
 
 #### Assumptions
-Note there are a assumptions when using this tool. Your XP bar MUST be 100% opacity for this script to work. Otherwise it will vary too much in color. I don't use any techniques like grayscale, median filters, binarization, or tesseract post processing. Also It will typically work better if it is at the bottom of the monitor.
+
+When using the ExperiencePrediction tool, please note the following assumptions:
+
+1. **XP Bar Opacity**: Your XP bar must be set to 100% opacity for the script to work correctly. Variations in color due to opacity changes can affect the accuracy of the tool.
+2. **Screen Position**: The tool works best when the XP bar is positioned at the bottom of the monitor. Initial scans are performed from the bottom up.
+3. **Techniques**: The tool does not use advanced image processing techniques such as grayscale, median filters, binarization, or tesseract post-processing.
+
+#### Troubleshooting
+
+If the XP bar is not being detected, try the following steps:
+
+- Ensure the entire XP bar is visible on the screen.
+- Position the XP bar at the bottom of the screen for optimal detection.
+- Do not move the XP bar once the program has started. If you need to move it, restart the program.
+
 
 #### Configuration Parameters
 
@@ -40,6 +54,8 @@ The following configuration parameters are used in the ExperiencePrediction tool
 
 - `DEAD_PLAYER_THRESHOLD`: A float value representing the threshold to determine if a player is dead and lost a level. Default is `70.0`.
 - `SLEEP_TIME`: An integer representing the sleep time in seconds between each screen-scraping iteration. Default is `1`.
+- `STARTUP_DELAY`: An integer representing the delay in seconds before the tool starts running. Default is `5`.
+- `XP_BAR_BLOCKED_TOLERANCE`: An integer representing the tolerance level for detecting if the XP bar is blocked. Default is `0.99`.
 
 ### MacroMaker 
 Macro is a Python script that allows you to create and manage spellbooks for different classes and generate macros based on the spells in the spellbook.
