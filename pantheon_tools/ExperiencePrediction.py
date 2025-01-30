@@ -157,11 +157,11 @@ def main() -> int:
                     initial_xp = current_xp
                     print(f"You Died. Current Experience: {current_xp * 100:.2f}%")
                 else:
-                    kills_to_level: float = (100 - initial_xp) / xp_gained
-                    print(f"Gained Experience: {xp_gained:.2f}% - Kills to level: {kills_to_level:.2f}")
+                    kills_to_level: float = int((100 - (current_xp * 100)) / xp_gained)
+                    print(f"Gained Experience: {xp_gained:.2f}% - Kills to level: {kills_to_level}")
                     initial_xp = current_xp
             elif current_xp < initial_xp:
-                xp_lost: float = (initial_xp - current_xp) * 100
+                xp_lost: float = (initial_xp - current_xp)
                 print(f"You Died. Lost Experience: {xp_lost * 100:.2f}%")
                 initial_xp = current_xp
                 
