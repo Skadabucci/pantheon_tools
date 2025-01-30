@@ -11,6 +11,7 @@ DARK_BLUE_COLOR: T.Tuple[int, int, int] = (0, 34, 64)
 LIGHT_BLUE_COLOR: T.Tuple[int, int, int] = (153, 166, 192)
 
 DEAD_PLAYER_THRESHOLD = 70.0
+LEVEL_UP_THRESHOLD = 95.0
 STARTUP_DELAY = 3
 XP_BAR_BLOCKED_TOLERANCE = 0.99
 XP_CHECK_SLEEP_TIME = 1
@@ -161,8 +162,8 @@ def main() -> int:
                     print(f"Gained Experience: {xp_gained:.2f}% - Kills to level: {kills_to_level}")
                     initial_xp = current_xp
             elif current_xp < initial_xp:
-                xp_lost: float = (initial_xp - current_xp)
-                print(f"You Died. Lost Experience: {xp_lost * 100:.2f}%")
+                xp_lost: float = (initial_xp - current_xp) * 100
+                print(f"You Died. Lost Experience: {xp_lost:.2f}%")
                 initial_xp = current_xp
                 
             sleep(XP_CHECK_SLEEP_TIME)
