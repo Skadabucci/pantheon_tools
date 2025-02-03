@@ -163,8 +163,12 @@ def main() -> int:
                     initial_xp = current_xp
             elif current_xp < initial_xp:
                 xp_lost: float = (initial_xp - current_xp) * 100
-                print(f"You Died. Lost Experience: {xp_lost:.2f}%")
-                initial_xp = current_xp
+                if xp_lost > LEVEL_UP_THRESHOLD:  # player probably leveled up, reset initial experience
+                    print(f"Level Up! Current Experience: {current_xp * 100:.2f}%")
+                    initial_xp = current_xp
+                else:
+                    print(f"You Died. Lost Experience: {xp_lost:.2f}%")
+                    initial_xp = current_xp
                 
             sleep(XP_CHECK_SLEEP_TIME)
     except KeyboardInterrupt:
