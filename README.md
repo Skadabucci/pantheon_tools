@@ -146,7 +146,7 @@ This project is licensed under the MIT License.
   * Handle the bug where users minimize the game or have a full screen app over Pantheon
   * Have console output rewrite itself to screen instead of printing constantly
   * Add Exp per hour tracking
-  * Handle level ups!!! if you go from ~99% to ~1% you should get a ding!
+  * ~~Handle level ups!!! if you go from ~99% to ~1% you should get a ding!~~
 * MacroMaker
   * Turn the create_macro function into a Class for better handling of the object (ie: keeping wait times in float form and writing the file at the end of creation).
   * Have one spellbook and associate chapters of a spellbook with classes.
