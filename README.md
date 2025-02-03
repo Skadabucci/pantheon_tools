@@ -141,6 +141,7 @@ Here is an example of how to use the script:
 This project is licensed under the MIT License.
 
 ## Backlog / Wishlist
+* Optionally release this as a windows package (msi/exe)
 * Tests
 * ExpTracker
   * Handle the bug where users minimize the game or have a full screen app over Pantheon
