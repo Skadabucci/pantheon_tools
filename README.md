@@ -17,10 +17,46 @@ Pantheon Tools is a set of python scripts that help automate some of the tedious
     py.exe -m pip install -r requirements.txt
     ```
 
+## Detailed Installation Guide
+
+Follow these steps to install and run Pantheon Tools:
+
+1. **Download and Install Python 3.x**:
+    - Go to the [Python official website](https://www.python.org/downloads/).
+    - Download the latest version of Python 3.x for Windows.
+    - Run the installer and follow the instructions. Make sure to check the box that says "Add Python to PATH".
+
+2. **Downloading the Release Package**
+    - Go to the [Pantheon Tools releases page](https://github.com/skadabucci/pantheon_tools/releases).
+    - Select the latest release version (ex: v0.2.1).
+    - Download the latest release version of the package (zip file).
+    - Extract the contents of the zip file to a directory of your choice.
+    - Open File Explorer and navigate to the directory where you extracted the zip file.
+    - Shift + Right-click in the directory and select "Open PowerShell window here" or "Open in terminal".
+
+3. **Set Up a Virtual Environment**:
+    - In the PowerShell or Command Prompt window, type the following command and press Enter to create a virtual environment:
+      ```sh
+      py.exe -m venv venv
+      ```
+    - Activate the virtual environment:
+      ```sh
+      .\venv\Scripts\activate
+      ```
+
+4. **Install Required Packages**:
+    - In the activated virtual environment, type the following command and press Enter to install the required packages:
+      ```sh
+      py.exe -m pip install -r requirements.txt
+      ```
+
+5. **Select an application below to run**
+    - Try for the experience prediction or macro maker applications. (run the commands in the **Usage** sections)
+
 ## Usage
 
 ### ExperiencePrediction
-This tool runs continuously and makes predictions on how much XP you gain per kill. It does some simple screen-scraping to find the XP bar and then calcualte changes.
+This tool runs continuously and makes predictions on how much XP you gain per kill. It does some simple screen-scraping to find the XP bar and then calculate changes.
 
 ```sh
 py.exe -m pantheon_tools.ExperiencePrediction
