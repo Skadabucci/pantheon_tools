@@ -16,8 +16,9 @@ STARTUP_DELAY = 3
 XP_BAR_BLOCKED_TOLERANCE = 0.99
 XP_CHECK_SLEEP_TIME = 1
 
-def diff_pixels(a, b, max_distance=3000):
-    distance = sum((a - b) ** 2 for a, b in zip(a, b))
+
+def diff_pixels(a: T.Tuple[int, int, int], b: T.Tuple[int, int, int], max_distance: int = 3000) -> bool:
+    distance: int = sum((a - b) ** 2 for a, b in zip(a, b))
     return distance < max_distance
 
 
